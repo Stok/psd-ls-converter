@@ -39,6 +39,10 @@ namespace PSDtoLS
             }
             lineshape_limits = new double[3] { Convert.ToDouble(p[2]), Convert.ToDouble(p[3]), Convert.ToDouble(p[4]) };
             integration_time = psd_data[0, 0];
+            if (integration_time < lineshape_limits[2])
+            {
+                Console.WriteLine("Warning, you have requested a lineshape with a higher resolution than the integration time of the PSD. Results may be weird.");
+            }
             gamma = new double[Convert.ToInt32(integration_time * maxSampleRate), 2];
         }
 
@@ -46,19 +50,19 @@ namespace PSDtoLS
         {
             AutoCorrelationFnTerm2 term2 = new AutoCorrelationFnTerm2();
             term2.Initialize(psd_data);
-            double k = 0;
+            double k = (1 / maxSampleRate);
             for (int i = 0; i < (maxSampleRate * integration_time); i++)
             {
                 gamma[i, 0] = k;
                 gamma[i, 1] = term2.Evaluate(gamma[i, 0]);
-                k = k + (1 / (double)maxSampleRate);
+                k = k + (1 / maxSampleRate);
             }
         }
 
         public double[,] EvaluateLineShape()
         {
-            LineShape ls = new LineShape();
-            ls.Initialize(psd_data, gamma, 1);
+            Fourier fourier = new Fourier();
+            fourier.Initialize(gamma, 1);
 
             lineshape_data = new double[1 + Convert.ToInt32((lineshape_limits[1] - lineshape_limits[0]) / lineshape_limits[2]), 2];
             double del = lineshape_limits[0];
@@ -72,13 +76,13 @@ namespace PSDtoLS
             for (int i = 0; i < lineshape_data.Length / 2; i++)
             {
                 lineshape_data[i, 0] = del;
-                lineshape_data[i, 1] = ls.Evaluate(del);
+                lineshape_data[i, 1] = fourier.Evaluate(del);
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter("temp.TSV", true))
                 {
                     file.WriteLine(del.ToString() + '\t' + lineshape_data[i, 1].ToString());
                 }
-                Console.WriteLine(del.ToString() + '\t' + lineshape_data[i, 1].ToString());
-                del = del + (int)lineshape_limits[2];
+                //Console.WriteLine(del.ToString() + '\t' + lineshape_data[i, 1].ToString());
+                del = del + lineshape_limits[2];
             }
             return lineshape_data;
         }

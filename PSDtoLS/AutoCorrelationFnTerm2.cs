@@ -10,14 +10,12 @@ namespace PSDtoLS
     {
         double[,] S;
         int length;
-        double[] lims;
         double e, r;
 
         public void Initialize(double[,] s)
         {
             S = s;
             length = S.Length/2;
-            lims = new double[2] { S[0, 0], S[length - 1, 0] };
         }
 
         public double Evaluate(double tau)
