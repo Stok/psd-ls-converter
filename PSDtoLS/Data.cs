@@ -44,9 +44,9 @@ namespace PSDtoLS
                 Console.WriteLine("The data's integration time seems to be 0. Quitting.");
                 throw new InvalidInputDataException();
             }
-            if (integration_time < lineshape_limits[2])
+            if ((1/integration_time) > lineshape_limits[2])
             {
-                Console.WriteLine("Warning, you have requested a lineshape with a higher resolution than the integration time of the PSD. Results may be weird.");
+                Console.WriteLine("Warning, you have requested a lineshape with a higher resolution than 1/the integration time of the PSD. Results may be weird.");
             }
             gamma = new double[Convert.ToInt32(integration_time * maxSampleRate), 2];
         }
