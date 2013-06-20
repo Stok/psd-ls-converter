@@ -38,7 +38,12 @@ namespace PSDtoLS
                 this.psd_data = data;
             }
             lineshape_limits = new double[3] { Convert.ToDouble(p[2]), Convert.ToDouble(p[3]), Convert.ToDouble(p[4]) };
-            integration_time = psd_data[0, 0];
+            integration_time = 1/psd_data[0, 0];
+            if (integration_time == 0)
+            {
+                Console.WriteLine("The data's integration time seems to be 0. Quitting.");
+                throw new InvalidInputDataException();
+            }
             if (integration_time < lineshape_limits[2])
             {
                 Console.WriteLine("Warning, you have requested a lineshape with a higher resolution than the integration time of the PSD. Results may be weird.");
@@ -86,5 +91,10 @@ namespace PSDtoLS
             }
             return lineshape_data;
         }
+
+        
     }
+    public class InvalidInputDataException : Exception { }
+    
+
 }

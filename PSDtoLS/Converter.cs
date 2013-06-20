@@ -31,7 +31,14 @@ namespace PSDtoLS
                     {
                         Console.WriteLine("Warning: Niquist rate not met for desired output range. You may get strange output.");
                     }
-                    d = ioHelper.InitializeDataObject();
+                    try
+                    {
+                        d = ioHelper.InitializeDataObject();
+                    }
+                    catch (InvalidInputDataException)
+                    {
+                        return;
+                    }
                 }
                 else 
                 {
