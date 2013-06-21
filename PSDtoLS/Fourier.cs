@@ -26,7 +26,7 @@ namespace PSDtoLS
             j = 0;
             for (i = 0; i < length; i++)
             {
-                j += Math.Cos(2 * Math.PI * dnu * g[i, 0]) * g[i, 1];//(1 - (g[i, 0] / g[length - 1, 0])) * 
+                j += (1 - (g[i, 0] / g[length - 1, 0])) * Math.Cos(2 * Math.PI * dnu * g[i, 0]) * g[i, 1];//(1 - (g[i, 0] / g[length - 1, 0])) * 
             }
             return 4 * e0 * e0 * (g[length - 1, 0] - g[0, 0]) / length * j;
         }
