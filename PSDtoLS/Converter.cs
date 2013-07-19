@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+
 
 
 namespace PSDtoLS
@@ -26,8 +26,8 @@ namespace PSDtoLS
                 if (args.Length > 6)
                 {
                     ioHelper = new TSVIOHelper(args);
-                    if (Convert.ToDouble(args[2]) / 2 < Math.Abs(Convert.ToDouble(args[5]))
-                        || Convert.ToDouble(args[2]) / 2 < Math.Abs(Convert.ToDouble(args[5])))
+                    if (double.Parse(args[2], NumberFormatInfo.InvariantInfo) / 2 < Math.Abs(double.Parse(args[5], NumberFormatInfo.InvariantInfo))
+                        || double.Parse(args[2], NumberFormatInfo.InvariantInfo) / 2 < Math.Abs(double.Parse(args[5], NumberFormatInfo.InvariantInfo)))
                     {
                         Console.WriteLine("Warning: Niquist rate not met for desired output range. You may get strange output.");
                     }
@@ -35,7 +35,7 @@ namespace PSDtoLS
                     {
                         d = ioHelper.InitializeDataObject();
                     }
-                    catch (InvalidInputDataException)
+                    catch (TSVIOHelper.InvalidInputDataException)
                     {
                         return;
                     }

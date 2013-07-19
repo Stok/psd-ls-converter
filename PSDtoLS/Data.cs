@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace PSDtoLS
 {
@@ -37,12 +36,12 @@ namespace PSDtoLS
             {
                 this.psd_data = data;
             }
-            lineshape_limits = new double[3] { Convert.ToDouble(p[2]), Convert.ToDouble(p[3]), Convert.ToDouble(p[4]) };
+            lineshape_limits = new double[3] { double.Parse(p[2], NumberFormatInfo.InvariantInfo), double.Parse(p[3], NumberFormatInfo.InvariantInfo), double.Parse(p[4], NumberFormatInfo.InvariantInfo) };
             integration_time = 1/psd_data[0, 0];
             if (integration_time == 0)
             {
-                Console.WriteLine("The data's integration time seems to be 0. Quitting.");
-                throw new InvalidInputDataException();
+                Console.WriteLine("The data's integration time seems to be infinite. Quitting.");
+                throw new TSVIOHelper.InvalidInputDataException();
             }
             if ((1/integration_time) > lineshape_limits[2])
             {
@@ -55,12 +54,21 @@ namespace PSDtoLS
         {
             AutoCorrelationFnTerm2 term2 = new AutoCorrelationFnTerm2();
             term2.Initialize(psd_data);
+
+            Console.WriteLine("You have requested the evaluation of " + (integration_time * maxSampleRate).ToString() + " values of gamma");
+            int j = 0, percent = 0;
             double k = (1 / maxSampleRate);
             for (int i = 0; i < (maxSampleRate * integration_time); i++)
             {
                 gamma[i, 0] = k;
                 gamma[i, 1] = term2.Evaluate(gamma[i, 0]);
                 k = k + (1 / maxSampleRate);
+                if (i == j)
+                {
+                    j = j + (int)Math.Round((maxSampleRate * integration_time)/10);
+                    Console.WriteLine((percent).ToString() + "% complete.");
+                    percent = percent + 10;
+                }
             }
         }
 
@@ -71,7 +79,7 @@ namespace PSDtoLS
 
             lineshape_data = new double[1 + Convert.ToInt32((lineshape_limits[1] - lineshape_limits[0]) / lineshape_limits[2]), 2];
             double del = lineshape_limits[0];
-
+            Console.WriteLine("You have requested " + (lineshape_data.Length / 2).ToString() + " points. Calculating...");
             try
             {
                 System.IO.File.Delete("temp.TSV");
@@ -92,9 +100,10 @@ namespace PSDtoLS
             return lineshape_data;
         }
 
+
         
     }
-    public class InvalidInputDataException : Exception { }
+    
     
 
 }
