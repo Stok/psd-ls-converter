@@ -55,7 +55,7 @@ namespace PSDtoLS
             AutoCorrelationFnTerm2 term2 = new AutoCorrelationFnTerm2();
             term2.Initialize(psd_data);
 
-            Console.WriteLine("You have requested the evaluation of " + (integration_time * maxSampleRate).ToString() + " values of gamma");
+            Console.WriteLine("You have requested the evaluation of " + (integration_time * maxSampleRate).ToString() + " gamma values.");
             int j = 0, percent = 0;
             double k = (1 / maxSampleRate);
             for (int i = 0; i < (maxSampleRate * integration_time); i++)
