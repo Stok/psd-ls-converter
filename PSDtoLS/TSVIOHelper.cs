@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.VisualBasic.FileIO;
-using System.Globalization;
 
 namespace PSDtoLS
 {
@@ -81,49 +82,23 @@ namespace PSDtoLS
         }
         private double[,] readFile(string file)
         {
+            TextFieldParser parser = new TextFieldParser(file);
+            parser.Delimiters = new string[] { "\t" };
             List<string[]> lst = new List<string[]>();
-            try
+            while (!parser.EndOfData)
             {
-                TextFieldParser parser = new TextFieldParser(file);
-                parser.Delimiters = new string[] { "\t" };
-                while (!parser.EndOfData)
-                {
-                    try
-                    {
-                        string[] ss = parser.ReadFields();
-                        lst.Add(ss);
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Cannot Read Line");
-                    }
-                }
+                lst.Add(parser.ReadFields());
             }
-            catch
-            {
-                throw new InvalidInputDataException();
-            }
-            
 
             double[,] s = new double[lst.Count, 2];
             for (int i = 0; i < lst.Count; i++)
             {
 
-                //s[i, 0] = double.Parse(lst[i][0].Replace(",", "."));
-                //s[i, 1] = double.Parse(lst[i][1].Replace(",", "."));
-                try
-                {
-                    s[i, 0] = double.Parse(lst[i][0], NumberFormatInfo.InvariantInfo);
-                    s[i, 1] = double.Parse(lst[i][1], NumberFormatInfo.InvariantInfo);
-                }
-                catch
-                {
-                    Console.WriteLine("Could not convert this to double:");
-                    Console.WriteLine(lst[i][0] + " " + lst[i][1]);
-                }
+                s[i, 0] = Convert.ToDouble(lst[i][0].Replace(",", "."));
+                s[i, 1] = Convert.ToDouble(lst[i][1].Replace(",", "."));
             }
             return s;
         }
-        public class InvalidInputDataException : Exception { }
+
     }
 }
