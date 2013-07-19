@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PSDtoLS
 {
@@ -12,10 +10,12 @@ namespace PSDtoLS
         int length;
         double e, r;
 
+
         public void Initialize(double[,] s)
         {
             S = s;
             length = S.Length/2;
+
         }
 
         public double Evaluate(double tau)
