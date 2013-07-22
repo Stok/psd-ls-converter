@@ -23,7 +23,7 @@ namespace PSDtoLS
         {
             psd_length = data.Length / 2;
             psd_data = new double[psd_length, 2];
-            maxSampleRate = Convert.ToInt32(p[0]);
+            maxSampleRate = Convert.ToInt32(Math.Ceiling(double.Parse(p[0])));
             if (p[1] == "dB")
             {
                 for (int i = 0; i < psd_length; i++)
@@ -47,7 +47,7 @@ namespace PSDtoLS
             {
                 Console.WriteLine("Warning, you have requested a lineshape with a higher resolution than 1/the integration time of the PSD. Results may be weird.");
             }
-            gamma = new double[Convert.ToInt32(integration_time * maxSampleRate), 2];
+            gamma = new double[Convert.ToInt32(Math.Ceiling(integration_time * maxSampleRate)), 2];
         }
 
         public void EvaluateACFunction()
@@ -55,7 +55,7 @@ namespace PSDtoLS
             AutoCorrelationFnTerm2 term2 = new AutoCorrelationFnTerm2();
             term2.Initialize(psd_data);
 
-            Console.WriteLine("You have requested the evaluation of " + (integration_time * maxSampleRate).ToString() + " gamma values.");
+            Console.WriteLine("You have requested the evaluation of " + (gamma.Length/2).ToString() + " gamma values.");
             int j = 0, percent = 0;
             double k = (1 / maxSampleRate);
             for (int i = 0; i < (maxSampleRate * integration_time); i++)
@@ -77,8 +77,8 @@ namespace PSDtoLS
             Fourier fourier = new Fourier();
             fourier.Initialize(gamma, 1);
 
-            lineshape_data = new double[1 + Convert.ToInt32((lineshape_limits[1] - lineshape_limits[0]) / lineshape_limits[2]), 2];
-            double del = lineshape_limits[0];
+            lineshape_data = new double[Convert.ToInt32(Math.Ceiling((lineshape_limits[1] - lineshape_limits[0]) / lineshape_limits[2])), 2];
+            double delta = lineshape_limits[0];
             Console.WriteLine("You have requested " + (lineshape_data.Length / 2).ToString() + " points. Calculating...");
             try
             {
@@ -88,14 +88,14 @@ namespace PSDtoLS
 
             for (int i = 0; i < lineshape_data.Length / 2; i++)
             {
-                lineshape_data[i, 0] = del;
-                lineshape_data[i, 1] = fourier.Evaluate(del);
+                lineshape_data[i, 0] = delta;
+                lineshape_data[i, 1] = fourier.Evaluate(delta);
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter("temp.TSV", true))
                 {
-                    file.WriteLine(del.ToString() + '\t' + lineshape_data[i, 1].ToString());
+                    file.WriteLine(delta.ToString() + '\t' + lineshape_data[i, 1].ToString());
                 }
                 //Console.WriteLine(del.ToString() + '\t' + lineshape_data[i, 1].ToString());
-                del = del + lineshape_limits[2];
+                delta = delta + lineshape_limits[2];
             }
             return lineshape_data;
         }
