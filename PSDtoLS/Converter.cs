@@ -37,6 +37,7 @@ namespace PSDtoLS
                     }
                     catch (TSVIOHelper.InvalidInputDataException)
                     {
+						Console.WriteLine ("Invalid Input Data. File either not found or corrupted.");
                         return;
                     }
                 }
