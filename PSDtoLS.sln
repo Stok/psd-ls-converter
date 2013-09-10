@@ -1,7 +1,8 @@
-
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSDtoLS", "PSDtoLS\PSDtoLS.csproj", "{B5AEDA6F-2142-4901-9E54-019E7A5E3DBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libpsdls", "libpsdls\libpsdls.csproj", "{8F6D65E9-1D0F-456E-89DB-DB4F1D7B2AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +14,10 @@ Global
 		{B5AEDA6F-2142-4901-9E54-019E7A5E3DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5AEDA6F-2142-4901-9E54-019E7A5E3DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5AEDA6F-2142-4901-9E54-019E7A5E3DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F6D65E9-1D0F-456E-89DB-DB4F1D7B2AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F6D65E9-1D0F-456E-89DB-DB4F1D7B2AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F6D65E9-1D0F-456E-89DB-DB4F1D7B2AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F6D65E9-1D0F-456E-89DB-DB4F1D7B2AE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

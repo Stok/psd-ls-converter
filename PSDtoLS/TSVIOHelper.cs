@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualBasic.FileIO;
 using System.Globalization;
+using libpsdls;
 
 namespace PSDtoLS
 {
@@ -101,7 +102,7 @@ namespace PSDtoLS
             }
             catch
             {
-                throw new InvalidInputDataException();
+                throw new InvalidDataFileException();
             }
             
 
@@ -124,6 +125,6 @@ namespace PSDtoLS
             }
             return s;
         }
-        public class InvalidInputDataException : Exception { }
+        public class InvalidDataFileException : Exception { }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
+using libpsdls;
 
 
 
@@ -35,7 +36,7 @@ namespace PSDtoLS
                     {
                         d = ioHelper.InitializeDataObject();
                     }
-                    catch (TSVIOHelper.InvalidInputDataException)
+                    catch (TSVIOHelper.InvalidDataFileException)
                     {
 						Console.WriteLine ("Invalid Input Data. File either not found or corrupted.");
                         return;
