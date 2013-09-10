@@ -1,15 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PSDtoLS/Converter.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="PSDtoLS/AutoCorrelationFnTerm2.cs">
     <Files>
       <File FileName="PSDtoLS/Converter.cs" Line="38" Column="43" />
-      <File FileName="PSDtoLS/TSVIOHelper.cs" Line="118" Column="18" />
+      <File FileName="PSDtoLS/AutoCorrelationFnTerm2.cs" Line="27" Column="37" />
+      <File FileName="PSDtoLS/Data.cs" Line="64" Column="37" />
+      <File FileName="PSDtoLS/Fourier.cs" Line="27" Column="76" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/seantokunaga/Documents/Programming Projects/PSD-LS-Converter/PSDtoLS/TSVIOHelper.cs" line="89" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.PSDtoLS>
@@ -17,7 +17,7 @@
       <Data Name="PSD-LS test mode (Debug)" Id="c4b861f2-da13-46b9-a371-6ecad94b7405" ModeId="Mono Soft Debugger">
         <CommandData>
           <Item Key="MonoDevelop.Ide.Execution.CustomArgsCustomizer">
-            <Value Arguments="&quot;input.dat&quot; &quot;output.tsv&quot; 60000 dB -1500 1500 1" WorkingDirectory="/Users/seantokunaga/Documents/Programming Projects/PSD-LS-Converter/PSDtoLS/bin/Debug" ctype="CustomArgsExecutionModeData">
+            <Value Arguments="&quot;flatdata.tsv&quot; &quot;output.tsv&quot; 60 B -10 10 1" WorkingDirectory="/Users/seantokunaga/Documents/" ctype="CustomArgsExecutionModeData">
               <EnvironmentVariables />
             </Value>
           </Item>
