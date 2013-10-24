@@ -1,11 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PSDtoLS/AutoCorrelationFnTerm2.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="libpsdls/Fourier.cs">
     <Files>
-      <File FileName="PSDtoLS/Converter.cs" Line="38" Column="43" />
+      <File FileName="PSDtoLS/Converter.cs" Line="1" Column="1" />
       <File FileName="PSDtoLS/AutoCorrelationFnTerm2.cs" Line="27" Column="37" />
-      <File FileName="PSDtoLS/Data.cs" Line="64" Column="37" />
-      <File FileName="PSDtoLS/Fourier.cs" Line="27" Column="76" />
+      <File FileName="PSDtoLS/Data.cs" Line="18" Column="3" />
+      <File FileName="PSDtoLS/Fourier.cs" Line="1" Column="1" />
+      <File FileName="libpsdls/Properties/AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="libpsdls/AutoCorrelationFnTerm2.cs" Line="1" Column="1" />
+      <File FileName="libpsdls/Data.cs" Line="1" Column="1" />
+      <File FileName="libpsdls/Fourier.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
