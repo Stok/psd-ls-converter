@@ -27,8 +27,7 @@ namespace PSDtoLS
                 if (args.Length > 6)
                 {
                     ioHelper = new TSVIOHelper(args);
-                    if (double.Parse(args[2], NumberFormatInfo.InvariantInfo) / 2 < Math.Abs(double.Parse(args[5], NumberFormatInfo.InvariantInfo))
-                        || double.Parse(args[2], NumberFormatInfo.InvariantInfo) / 2 < Math.Abs(double.Parse(args[5], NumberFormatInfo.InvariantInfo)))
+                    if (double.Parse(args[2], NumberFormatInfo.InvariantInfo) / 2 < Math.Abs(double.Parse(args[5], NumberFormatInfo.InvariantInfo)))
                     {
                         Console.WriteLine("Warning: Niquist rate not met for desired output range. You may get strange output.");
                     }
